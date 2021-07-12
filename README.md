@@ -27,4 +27,4 @@ Put link here
 # Contribution
 Made with ✨ by Amanda
 
-### copyright info-where applies
+### ISC
