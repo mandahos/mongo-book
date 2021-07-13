@@ -8,7 +8,7 @@ router.use('/api', apiRoutes);
 //router.use('/', htmlRoutes);
 
 router.use((req, res) => {
-    res.status(404).send('Uh Oh, Something went wonky??!!')
+    res.status(404).send('Uh Oh, Something went wonky??!!');
 });
 
 module.exports = router;
