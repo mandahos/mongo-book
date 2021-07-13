@@ -1,15 +1,15 @@
-#!/usr/bin/env node
-'use strict';
+// #!/usr/bin/env node
+// 'use strict';
 
 
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
-const conn = mongoose.connection;
-const { Schema, model } = mongoose.Schema;
-// const Schema = mongoose.Schema;
+// const mongoose = require('mongoose');
+// mongoose.connect('mongodb://localhost/test');
+// const conn = mongoose.connection;
+// const { Schema, model } = mongoose.Schema;
+// // const Schema = mongoose.Schema;
 
 
-// const { Schema, model } = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 const UserSchema = new Schema({
     username: {
@@ -54,13 +54,15 @@ const UserSchema = new Schema({
     }
 );
 
-//create User model using the UserSchema
-const User = model('User', UserSchema);
+
 
 //get the total count of friends
 UserSchema.virtual('friendCount').get(function(){
     return this.friends.length;
 });
+
+//create User model using the UserSchema
+const User = model('User', UserSchema);
 
 //exports
 module.exports = User;
