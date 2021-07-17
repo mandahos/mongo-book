@@ -21,6 +21,23 @@ const thoughtController = {
         })
         .cath(err => res.json(err));
     },
+
+    addReaction({ params, body}, res) {
+        Thought.findOneandUpdate(
+            { _id: params.thoughtId },
+            { $push: { replies: body } },
+            { new: true }
+        )
+        .then(dbUserData => {
+            if (!dbUserData) {
+                res.status(404).json({ message: 'Sorry no comment found' });
+                return;
+            }
+            res.json(dbUserData);
+        })
+        .catch(err => res.json(err));
+    },
+    
     //remove thought
 
     removeThought({ params}, res) {
@@ -43,6 +60,16 @@ const thoughtController = {
             res.json(dbUserData);
         })
         .cath(err => res.json(err));
+    },
+
+    removeReaction({ params }, res){
+        Thought.findOneAndDelete(
+            { _id: params.thoughtId },
+            { $pull: {reactions: {reactionID: params.reactionID } } },
+            {new: true }
+        )
+        .then(dbUserData => res.json(dbUserData))
+        .catch(err => res.json(err));
     }
 };
 
