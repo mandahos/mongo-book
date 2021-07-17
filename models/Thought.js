@@ -1,9 +1,9 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
 const ReactionSchema = new Schema({
     reactionId: {
-        type: Schema.Types.ObjectId(),
+        type: Schema.Types.ObjectId,
         default: () => new Types.ObjectId(),
     },
     reactionBody: {
@@ -16,7 +16,7 @@ const ReactionSchema = new Schema({
         required: 'Please enter your username.'
     },
     createdAt: {
-        type: Data,
+        type: String,
         default: Date.now,
         get: createdAtVal => dateFormat(createdAtVal)
     }

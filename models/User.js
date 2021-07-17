@@ -1,15 +1,4 @@
-// #!/usr/bin/env node
-// 'use strict';
-
-
-// const mongoose = require('mongoose');
-// mongoose.connect('mongodb://localhost/test');
-// const conn = mongoose.connection;
-// const { Schema, model } = mongoose.Schema;
-// // const Schema = mongoose.Schema;
-
-
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 
 const UserSchema = new Schema({
     username: {
