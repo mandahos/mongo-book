@@ -9,12 +9,12 @@ const thoughtController = {
             return User.findOneandUpdate(
                 { _id: params.userId },
                 { $push: { thoughts: _id } },
-                { new: true }
+                { new: true, runValidators: true }
             );
         })
         .then(dbUserData => {
             if (!dbUserData) {
-                res.status(404).json ({ message: 'Invalid ID, please enter a valid User ID.'});
+                res.status(404).json ({ message: 'Try again, no user with this ID.' });
                 return;
             }
             res.json(dbUserData);
@@ -26,11 +26,11 @@ const thoughtController = {
         Thought.findOneandUpdate(
             { _id: params.thoughtId },
             { $push: { replies: body } },
-            { new: true }
+            { new: true, runValidators: true }
         )
         .then(dbUserData => {
             if (!dbUserData) {
-                res.status(404).json({ message: 'Sorry no comment found' });
+                res.status(404).json({ message: 'Try again, no user with this ID.' });
                 return;
             }
             res.json(dbUserData);
@@ -44,7 +44,7 @@ const thoughtController = {
         Thought.findOneandDelete({ _id: params.thoughtId })
         .then(deletedThought => {
             if (!deletedThought) {
-                return res.status(404).json({ message: 'No Thought found, please enter a valid ID.'});
+                return res.status(404).json({ message: 'Try again, no thought with this ID.' });
             }
             return User.findOneandUpdate(
                 { _id: params.userId },
@@ -54,7 +54,7 @@ const thoughtController = {
         })
         .then(dbUserData => {
             if(!dbUserData) {
-                res.status(404).json({ message: 'No User found with this ID' });
+                res.status(404).json({ message: 'Try again, no thought with this ID.' });
                 return;
             }
             res.json(dbUserData);
