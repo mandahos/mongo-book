@@ -29,6 +29,12 @@ const ReactionSchema = new Schema({
 );    
 
 const ThoughtSchema = new Schema({
+    
+    username: {
+        type: String,
+        required: true,
+        trim: true
+    },
     thoughtText: {
         type: String,
         required: 'Please enter your thoughts!',
@@ -40,11 +46,7 @@ const ThoughtSchema = new Schema({
         default: Date.now,
         get: createdAtVal => dateFormat(createdAtVal)
     },
-    username: {
-        type: String,
-        required: true,
-        trim: true
-    },
+    
     reactions: [ReactionSchema]
 },
     {
@@ -56,10 +58,10 @@ const ThoughtSchema = new Schema({
     }
 );
 
-const Thought = model('Thought', ThoughtSchema);
-
 ThoughtSchema.virtual('reactionCount').get(function () {
     return this.reactions.length;
 });
 
-module.exports = Thought;
+const Thought = model('Thought', ThoughtSchema);
+
+module.exports = Thought
