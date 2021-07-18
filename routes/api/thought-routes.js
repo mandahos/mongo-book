@@ -29,7 +29,7 @@ router
     .delete(removeReaction)
 
 router
-    .route('/:thoughtId/reaction/:reactionId')
+    .route('/:thoughtId/reactions/:reactionId')
     .delete(removeReaction)
 
 module.exports = router;
