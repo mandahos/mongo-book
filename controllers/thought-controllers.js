@@ -54,7 +54,7 @@ const thoughtController = {
      //remove thought
 
      removeThought({ params }, res) {
-        Thought.findOneandDelete({ _id: params.thoughtId })
+        Thought.findOneAndDelete({ _id: params.thoughtId })
         .then(deletedThought => {
             if (!deletedThought) {
                 return res.status(404).json({ message: 'Try again, no thought with this ID.' });
@@ -90,7 +90,7 @@ const thoughtController = {
    
     //remove reaction
     removeReaction({ params }, res) {
-        Thought.findOneAndDelete(
+        Thought.findOneAndUpdate(
             { _id: params.thoughtId },
             { $pull: { reactions: {reactionID: params.reactionID } } },
             {new: true }

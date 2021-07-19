@@ -12,7 +12,6 @@ router
     .route('/')
     .get(getAllThoughts)
         
-
 router
     .route('/:userId')
     .post(addThought);
