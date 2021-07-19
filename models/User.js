@@ -18,12 +18,11 @@ const UserSchema = new Schema({
             );
     },
     message: 'Please enter a valid Email',
-}
+},
     },
     thoughts: [
         {
             type: Schema.Types.ObjectId,
-            
             ref: 'Thought'
         }
     ],
@@ -46,9 +45,9 @@ const UserSchema = new Schema({
 
 
 //get the total count of friends
-UserSchema.virtual('friendCount').get(function(){
+UserSchema.virtual('friendCount').get(function () {
     return this.friends.length;
-});
+})
 
 //create User model using the UserSchema
 const User = model('User', UserSchema);
