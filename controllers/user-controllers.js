@@ -2,7 +2,7 @@ const { User, Thought, Types } = require('../models');
 
 const userController = {
     //get all users
-    getAllUser(req, res) {
+    getAllUsers(req, res) {
         User.find({})
             .populate({
                 path: 'thoughts',
@@ -13,7 +13,7 @@ const userController = {
             .catch(err => {
                 console.log(err);
                 res.status(400).json(err);
-            });
+            })
     },
 
     //get one User by ID
@@ -24,14 +24,14 @@ const userController = {
                 select: '-__v'
             })
             .select('-__v')
-            .then(dbUserData => {
+            .then((dbUserData) => {
                 if (!dbUserData) {
-                    res.status(404).json({ message: 'Try again, no user with this ID.' });
+                    res.status(404).json({ message: "No user found with this id!" });
                     return;
                 }
                 res.json(dbUserData);
             })
-            .catch(err => {
+            .catch((err) => {
                 console.log(err);
                 res.status(400).json(err);
             });
@@ -45,9 +45,9 @@ const userController = {
     },
 
     updateUser({ params, body }, res) {
-        User.findOneAndUpdate(
-            { _id: params.id },
-            body, {new: true, runValidators: true })
+        User.findOneAndUpdate
+            ({ _id: params.id }, body,
+                { new: true, runValidators: true })
             .then((dbUserData) => {
                 if (!dbUserData) {
                     res.status(404).json({ message: 'Try again, no user with this ID.' });
@@ -88,6 +88,7 @@ const userController = {
                 res.status(400).json(err);
             });
     },
+
     removeFriend({ params }, res) {
         User.findByIdAndUpdate(
             { _id: params.id },
