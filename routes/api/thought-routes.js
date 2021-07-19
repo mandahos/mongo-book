@@ -15,7 +15,7 @@ router
 
 router
     .route('/:userId')
-    .post(addThought)
+    .post(addThought);
 
 router
     .route('/:thoughtId')

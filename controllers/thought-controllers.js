@@ -1,4 +1,4 @@
-const { Thought, User } = require('../models');
+const { Thought, User, Types } = require('../models');
 
 const thoughtController = {
     
@@ -15,9 +15,8 @@ const thoughtController = {
     },
 
     getThoughtById({ params }, res) {
-        console.log("params sent", params)
-        Thought.findOne({ _id: params.thoughtId })
-      .select("-__v")
+       Thought.findOne({ _id: params.thoughtId })
+      .select('-__v')
       .then((dbThoughtData) => {
         if (!dbThoughtData) {
           res.status(404).json({ message: 'Try again, no thought with this ID.'});
@@ -54,26 +53,22 @@ const thoughtController = {
 
      //remove thought
 
-     removeThought({ params}, res) {
+     removeThought({ params }, res) {
         Thought.findOneandDelete({ _id: params.thoughtId })
         .then(deletedThought => {
             if (!deletedThought) {
                 return res.status(404).json({ message: 'Try again, no thought with this ID.' });
             }
             return User.findOneandUpdate(
-                { _id: params.userId },
+                { _id: params.username },
                 { $pull: { thoughts: params.thoughtId } },
                 { new: true }
             );
         })
         .then(dbUserData => {
-            if(!dbUserData) {
-                res.status(404).json({ message: 'Try again, no thought with this ID.' });
-                return;
-            }
             res.json(dbUserData);
         })
-        .cath(err => res.json(err));
+        .catch(err => res.json(err));
     },
 
     //add reaction
@@ -94,10 +89,10 @@ const thoughtController = {
     },    
    
     //remove reaction
-    removeReaction({ params }, res){
+    removeReaction({ params }, res) {
         Thought.findOneAndDelete(
             { _id: params.thoughtId },
-            { $pull: {reactions: {reactionID: params.reactionID } } },
+            { $pull: { reactions: {reactionID: params.reactionID } } },
             {new: true }
         )
         .then(dbUserData => res.json(dbUserData))
