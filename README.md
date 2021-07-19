@@ -22,8 +22,8 @@ THEN I am able to successfully create and delete reactions to thoughts and add a
 * Express
 
 ## Video Links
-https://drive.google.com/file/d/1uluyFJLTNpsfLGe51o-Uau__vn6bXNej/view
-https://drive.google.com/file/d/1YiWF5fSlbVaRkLUq1JrZba-G8tUkQa1j/view
+* https://drive.google.com/file/d/1uluyFJLTNpsfLGe51o-Uau__vn6bXNej/view
+* https://drive.google.com/file/d/1YiWF5fSlbVaRkLUq1JrZba-G8tUkQa1j/view
 
 
 # Contribution
